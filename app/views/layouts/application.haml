@@ -1,0 +1,18 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title Autoservice
+    %meta{:content => "width=device-width,initial-scale=1", :name => "viewport"}/
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag "application", "data-turbo-track": "reload"
+    = javascript_include_tag "application", "data-turbo-track": "reload", defer: true
+  %body
+    = render 'layouts/header'
+    %main.container.main_container{:role => "main"}
+      = render 'layouts/flash'
+      -# = breadcrumbs style: :bootstrap4
+      = yield
+      = debug(params) if Rails.env.development?
+    = render 'layouts/footer'

@@ -1,0 +1,33 @@
+%header
+  %nav.navbar.navbar-expand-md.navbar-dark.fixed-top.bg-dark
+    .container
+      = link_to 'Home', root_path, id: 'logo', class:"navbar-brand"
+      %button.navbar-toggler{ data: { 'bs-toggle': 'collapse', 'bs-target': '#navbarToggle' }, aria: { controls: 'navbarToggler', expanded: 'false', label: 'Toggle navigation' } }
+        %span.navbar-toggler-icon
+      .collapse.navbar-collapse.justify-content-md-end{ id: 'navbarToggle' }
+        %ul.navbar-nav
+          %li.nav-item= link_to 'Link1', '#', class: 'nav-link'
+          %li.nav-item= link_to 'Link2', '#', class: 'nav-link'
+          -# - if current_user
+          -#   %li.nav-item
+          -#     = active_link_to comparisons_path, class: 'nav-link' do
+          -#       Comparisons(#{current_user.comparison_items.count})
+          %li.nav-item= link_to 'Help', '#', class: 'nav-link'
+          %li.nav-item= link_to 'Contact', '#', class: 'nav-link'
+          -# - if user_signed_in?
+          %li.nav-item.dropdown
+            %a.nav-link.dropdown-toggle{ aria: { expanded: 'false', haspopup: 'true' }, data: { 'bs-toggle': 'dropdown' }, href: '#', role: 'button', id: 'navbarDropdown' }
+              -# = image_tag current_user.avatar.variant(resize: "20x20") if current_user.avatar.attached?
+              Username
+              -# = current_user.username
+              %span.caret
+            .dropdown-menu{ aria: { labelledby: 'navbarDropdown' } }
+              = link_to 'Profile', '#', class: 'dropdown-item'
+              = link_to 'Settings', '#', class: 'dropdown-item'
+              = link_to 'Sign out', '#', method: :delete, class: 'dropdown-item'
+          -# - else
+          %li.nav-item= link_to 'sign in', '#', class: 'nav-link'
+          or
+          %li.nav-item= link_to 'sign up', '#', class: 'nav-link'
+          = link_to 'En', url_for(locale: :en), class: 'nav-link', wrap_tag: :li, wrap_class: 'nav-item'
+          = link_to 'Ru', url_for(locale: :ru), class: 'nav-link', wrap_tag: :li, wrap_class: 'nav-item'
