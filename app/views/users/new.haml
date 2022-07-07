@@ -1,0 +1,6 @@
+.row
+  .col
+    %h1 New user
+    = render "form", user: @user
+    .mb-3
+      = link_to "Back to users", users_path, class: "btn btn-md btn-outline-primary"

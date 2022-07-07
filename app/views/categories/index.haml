@@ -1,0 +1,8 @@
+%p{:style => "color: green"}= notice
+%h1 Categories
+= link_to "New category", new_category_path, class: "btn btn-lg btn-outline-primary mb-3"
+.row
+  .col
+    #categories
+      - @categories.each do |category|
+        = render category

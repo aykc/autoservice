@@ -1,0 +1,7 @@
+.row
+  .col
+    = render 'shared/error', obj: @order
+    %h1 New order
+    = render "form", order: @order
+    .mb-3
+      = link_to "Back to orders", orders_path, class: "btn btn-outline-primary"

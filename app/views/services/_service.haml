@@ -1,0 +1,13 @@
+.card.mb-1.shadow{:id => "#{dom_id service}"}
+  .card-header.bg-transparent
+    .row
+      .container
+        %p
+          %strong Name:
+          = link_to service.name, service_path(service)
+        %p
+          %strong Price:
+          = service.price
+        .d-flex
+          = link_to "edit", edit_service_path(service), class: "btn btn-sm btn-outline-warning mx-1"
+          = button_to "Destroy this service", service, method: :delete, class: "btn btn-sm btn-outline-danger mx-1"

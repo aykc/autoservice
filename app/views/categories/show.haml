@@ -1,0 +1,7 @@
+.row
+  .col
+    %h1 Категория:
+    %p{:style => "color: green"}= notice
+    = render @category
+    .d-flex
+      = link_to "Back to categories", categories_path, class: "btn btn-sm btn-outline-info"

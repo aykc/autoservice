@@ -1,0 +1,7 @@
+.row
+  .col
+    %h1 Editing order
+    = render "form", order: @order
+    .mb-3
+      = link_to "Back", @order, class: "btn btn-md btn-outline-primary"
+      = link_to "Back to orders", orders_path, class: "btn btn-md btn-outline-primary"

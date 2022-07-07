@@ -1,0 +1,21 @@
+.row
+  .col.col-md-3
+    = form_with(model: order) do |form|
+      .mb-3
+        = form.label :customer_name, class: "form-label"
+        = form.text_field :customer_name, class: "form-control form-control-md"
+      .mb-3
+        = form.label :phone_number, class: "form-label"
+        = form.text_field :phone_number, class: "form-control form-control-md"
+      .mb-3
+        = form.label :email, class: "form-label"
+        = form.email_field :email, class: "form-control form-control-md"
+      .mb-3
+        %h2 Услуги:
+        = fields_for :line_item do |line_item_form|
+          .mb-3
+            = form.label :service_id, class: "form-label"
+            = form.text_field :service_id, class: "form-control form-control-md"
+
+      .mb-3
+        = form.submit class: "btn btn-primary"
