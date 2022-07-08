@@ -3,7 +3,9 @@ class ServicesController < ApplicationController
 
   # GET /services or /services.json
   def index
-    @services = Service.all
+    @category = Category.includes(:services).find params[:category_id]
+    @service = @category.services.new
+    @services = @category.services.all
   end
 
   # GET /services/1 or /services/1.json
@@ -12,7 +14,8 @@ class ServicesController < ApplicationController
 
   # GET /services/new
   def new
-    @service = Service.new
+    @category = Category.find params[:category_id]
+    @service = @category.services.new
   end
 
   # GET /services/1/edit
@@ -21,12 +24,14 @@ class ServicesController < ApplicationController
 
   # POST /services or /services.json
   def create
-    @service = Service.new(service_params)
+    @category = Category.find params[:category_id]
+    @service = @category.services.new(service_params)
 
     respond_to do |format|
       if @service.save
         format.html { redirect_to service_url(@service), notice: "Service was successfully created." }
         format.json { render :show, status: :created, location: @service }
+        format.turbo_stream { render turbo_stream: turbo_stream.append(:services, @service)+turbo_stream.remove("new_category_#{@category.id}_service")}
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @service.errors, status: :unprocessable_entity }
@@ -52,7 +57,8 @@ class ServicesController < ApplicationController
     @service.destroy
 
     respond_to do |format|
-      format.html { redirect_to services_url, notice: "Service was successfully destroyed." }
+      format.turbo_stream { render turbo_stream: turbo_stream.remove(@service)}
+      format.html { redirect_back_or_to @service.category, notice: "Service was successfully destroyed." }
       format.json { head :no_content }
     end
   end

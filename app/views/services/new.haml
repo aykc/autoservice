@@ -1,0 +1,6 @@
+.row
+  .col
+    %h1 New service
+    = render "form", category: @category, service: @service
+    .mb-3
+      = link_to "Back to services", category_services_path(@category), class: "btn btn-md btn-outline-primary my-3"

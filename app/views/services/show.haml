@@ -4,4 +4,4 @@
     %p{:style => "color: green"}= notice
     = render @service
     .my-3
-      = link_to "Back to services", services_path, class: "btn btn-lg btn-outline-primary"
+      = link_to "Back to services", category_services_path(@category), class: "btn btn-lg btn-outline-primary"

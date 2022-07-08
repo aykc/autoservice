@@ -1,7 +1,7 @@
 %p{:style => "color: green"}= notice
-%h1 Услуги:
-= link_to "New service", new_service_path, class: "btn btn-lg btn-outline-primary my-3"
+%h1 Услуги категории #{link_to @category.name, @category}:
+= link_to "New service", new_category_service_path(@category, @service), class: "btn btn-lg btn-outline-primary my-3"
 #services
   - @services.each do |service|
     = render service
-= link_to "New service", new_service_path, class: "btn btn-lg btn-outline-primary my-3"
+= link_to "New service", new_category_service_path(@category, @service), class: "btn btn-lg btn-outline-primary my-3"

@@ -17,9 +17,10 @@
           %strong Email:
           = order.email
         %mb-2
+          = link_to "Add service", new_order_line_item_path(order), class: "btn btn-sm btn-outline-success"
           = link_to "Edit this order", edit_order_path(order), class: "btn btn-sm btn-outline-warning"
           .d-inline-block
             = button_to "Destroy this order", order, method: :delete, class: "btn btn-sm btn-outline-danger"
         %mb-2
           %h2 Services:
-          = render order.services
+          = render order.line_items

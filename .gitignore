@@ -35,3 +35,4 @@
 
 /node_modules
 Session.vim
+.byebug_history

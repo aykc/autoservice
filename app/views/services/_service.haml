@@ -2,11 +2,11 @@
   .card-header.bg-transparent
     .row
       .container
-        %p
-          %strong Name:
+        .mb-1
+          %strong Услуга:
           = link_to service.name, service_path(service)
-        %p
-          %strong Price:
+        .mb-1
+          %strong Цена:
           = service.price
         .d-flex
           = link_to "edit", edit_service_path(service), class: "btn btn-sm btn-outline-warning mx-1"

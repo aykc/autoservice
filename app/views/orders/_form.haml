@@ -12,10 +12,14 @@
         = form.email_field :email, class: "form-control form-control-md"
       .mb-3
         %h2 Услуги:
-        = fields_for :line_item do |line_item_form|
+        = form.fields_for :line_items do |line_item_form|
           .mb-3
-            = form.label :service_id, class: "form-label"
-            = form.text_field :service_id, class: "form-control form-control-md"
+            = line_item_form.label :service_id, class: "form-label"
+            -# = form.text_field :service_id, class: "form-control form-control-md"
+            = line_item_form.select :service_id, Service.all.collect{|s| [s.name, s.id] }, class: "form-control form-control-md"
+          .mb-3
+            = line_item_form.label :user_id, class: "form-label"
+            = line_item_form.select :user_id, User.all.collect{|s| [s.name, s.id] }, class: "form-control form-control-md"
 
       .mb-3
         = form.submit class: "btn btn-primary"
