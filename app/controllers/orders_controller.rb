@@ -4,6 +4,10 @@ class OrdersController < ApplicationController
   # GET /orders or /orders.json
   def index
     @orders = Order.all
+    respond_to do |format|
+      format.html
+      format.xlsx { render 'index', layout: false }
+    end
   end
 
   # GET /orders/1 or /orders/1.json

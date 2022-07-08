@@ -1,0 +1,13 @@
+wb = xlsx_package.workbook
+wb.add_worksheet(name: "Orders") do |sheet|
+  sheet.add_row ['ФИО клиента', 'Телефон клиента', 'Email клиента', 'Услуга', 'Цена', 'Исполнитель']
+  @orders.each do |order|
+    sheet.add_row [order.customer_name, order.phone_number, order.email]
+    order.line_items.each do |li|
+      sheet.add_row ['', '', '', li.service.name, li.service.price, li.user.name]
+    end
+    price = order.services.map(&:price).reduce(&:+)
+    sheet.add_row ['', '', '', '', "Итого: #{price}", '']
+    sheet.add_row
+  end
+end
