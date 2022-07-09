@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root "orders#index"
   get 'line_items/new'
   get 'line_items/create'
   # resources :services
@@ -13,5 +14,4 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
-  root "pages#index"
 end
