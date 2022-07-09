@@ -1,5 +1,6 @@
 .row
   .col
     %p{:style => "color: green"}= notice
+    %h1 Order:
     = render @order
     = link_to "Back to orders", orders_path, class: "btn btn-sm btn-outline-info"

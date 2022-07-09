@@ -14,7 +14,7 @@ class LineItemsController < ApplicationController
       if @line_item.save
         format.html { redirect_to order_url(@order), notice: "Service was successfully added." }
         format.json { render :show, status: :created, location: @order }
-        # format.turbo_stream
+        format.turbo_stream { render turbo_stream: turbo_stream.append(:line_items, @line_item)+turbo_stream.remove("new_order_#{@order.id}_line_item")}
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @line_item.errors, status: :unprocessable_entity }
@@ -26,6 +26,7 @@ class LineItemsController < ApplicationController
     @line_item.destroy
 
     respond_to do |format|
+      format.turbo_stream { render turbo_stream: turbo_stream.remove(@line_item)}
       format.html { redirect_to order_path(@line_item.order), notice: "Service was successfully removed." }
       format.json { head :no_content }
     end

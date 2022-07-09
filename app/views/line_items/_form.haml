@@ -1,12 +1,13 @@
-.row
-  .col.col-md-3
-    = form_with(model: [@order, line_item]) do |form|
-      .mb-3
-        = form.label :service_id, class: "form-label"
-        = form.select :service_id, Service.all.collect{|s| [s.name, s.id] }, class: "form-control form-control-md"
-      .mb-3
-        = form.label :user_id, class: "form-label"
-        = form.select :user_id, User.all.collect{|s| [s.name, s.id] }, class: "form-control form-control-md"
-      .mb-3
-        = form.submit class: "btn btn-primary"
+= turbo_frame_tag "new_#{dom_id(order)}_line_item" do
+  .row
+    .col.col-md-3
+      = form_with(model: [order, line_item]) do |form|
+        .mb-3
+          = form.label :service_id, class: "form-label"
+          = form.select :service_id, Service.all.collect{|s| [s.name, s.id] }, {}, class: "form-select"
+        .mb-3
+          = form.label :user_id, class: "form-label"
+          = form.select :user_id, User.all.collect{|s| [s.name, s.id] }, {}, class: "form-control form-control-md"
+        .mb-3
+          = form.submit class: "btn btn-primary"
 

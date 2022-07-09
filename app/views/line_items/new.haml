@@ -2,6 +2,6 @@
   .col
     = render 'shared/error', obj: @line_item
     %h1 New service
-    = render "form", line_item: @line_item
+    = render "form", order: @order, line_item: @line_item
     .mb-3
-      = link_to "Back order", order_path(@order), class: "btn btn-outline-primary"
+      = link_to "Back", order_path(@order), class: "btn btn-outline-primary"
