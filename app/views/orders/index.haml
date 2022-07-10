@@ -22,8 +22,7 @@
       = sort_link(@q, :line_items_user_name, 'Исполнитель')
     .mb-3
       = turbo_frame_tag "new_order"
-    = turbo_frame_tag 'orders' do
-      - @orders.each do |order|
-        = render order
+    = turbo_frame_tag :orders do
+      = render @orders
     .mb-3
       = link_to "New order", new_order_path, class: "btn btn-md btn-outline-primary"

@@ -3,10 +3,8 @@
     .col.col-8
       .card.mb-3.shadow
         .card-header.bg-transparent
-          = link_to order_path(order) do
-            .row
-              .container
-                %strong Order from #{order.created_at}
+          = link_to order, data: { turbo_frame: :_top } do
+            %strong Order from #{order.created_at}
         .card-body
           = turbo_frame_tag "edit_#{dom_id(order)}" do
             .row
