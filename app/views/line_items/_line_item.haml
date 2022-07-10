@@ -6,6 +6,7 @@
           .mb-1
             %strong Услуга:
             = link_to line_item.service.name, service_path(line_item.service)
+            (#{line_item.service.category.name})
           .mb-1
             %strong Цена:
             = line_item.service.price

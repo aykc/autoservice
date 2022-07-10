@@ -15,7 +15,9 @@
       |
       = sort_link(@q, :email)
       |
-      = sort_link(@q, :services_name, 'Имя услуги')
+      = sort_link(@q, :line_items_service_category_name, 'Категория')
+      |
+      = sort_link(@q, :line_items_service_name, 'Имя услуги')
       |
       = sort_link(@q, :line_items_user_name, 'Исполнитель')
     .mb-3

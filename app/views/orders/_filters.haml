@@ -3,8 +3,8 @@
   .col.border.mb-3
     = search_form_for @q do |f|
       .mb-1
-        = f.label :customer_name_or_phone_number_or_email_or_services_name_or_line_items_user_name_cont, 'Quick search', class: "form-label"
-        = f.search_field :customer_name_or_phone_number_or_email_or_services_name_or_line_items_user_name_cont, class: "form-control form-control-sm"
+        = f.label :customer_name_or_phone_number_or_email_or_line_items_service_category_name_or_line_items_service_name_or_line_items_user_name_cont, 'Quick search', class: "form-label"
+        = f.search_field :customer_name_or_phone_number_or_email_or_line_items_service_category_name_or_line_items_service_name_or_line_items_user_name_cont, class: "form-control form-control-sm"
       .mb-1
         = f.submit class: "btn btn-md btn-primary"
 
@@ -22,15 +22,14 @@
         = f.label :email_cont, 'email содержит', class: "form-label"
         = f.search_field :email_cont, class: "form-control form-control-sm"
       .mb-1
-        = f.label :services_name_cont, 'Услуга содержит', class: "form-label"
-        = f.search_field :services_name_cont, class: "form-control form-control-sm"
+        = f.label :line_items_service_category_name_cont, 'Категория услуги содержит', class: "form-label"
+        = f.search_field :line_items_service_category_name_cont, class: "form-control form-control-sm"
+      .mb-1
+        = f.label :line_items_service_name_cont, 'Услуга содержит', class: "form-label"
+        = f.search_field :line_items_service_name_cont, class: "form-control form-control-sm"
       .mb-1
         = f.label :line_items_user_name_cont, 'Исполнитель содержит', class: "form-label"
         = f.search_field :line_items_user_name_cont, class: "form-control form-control-sm"
-      
-      -# \# Attributes may be chained. Search multiple attributes for one value...
-      -# = f.label :name_or_description_or_email_or_articles_title_cont
-      -# = f.search_field :name_or_description_or_email_or_articles_title_cont
       
       .mb-1
         = f.submit class: "btn btn-md btn-primary"
