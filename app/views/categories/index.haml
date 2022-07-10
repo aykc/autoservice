@@ -1,8 +1,11 @@
-%p{:style => "color: green"}= notice
-%h1 Categories
-= link_to "New category", new_category_path, class: "btn btn-lg btn-outline-primary mb-3"
 .row
-  .col
-    #categories
-      - @categories.each do |category|
-        = render category
+  .col-9
+    %p{:style => "color: green"}= notice
+    %h1 Categories
+    = link_to "New category", new_category_path, data: { turbo_frame: 'new_category' }, class: "btn btn-lg btn-outline-primary mb-3"
+    .mb-3
+      = turbo_frame_tag 'new_category'
+    .row
+      .col
+        = turbo_frame_tag :categories do
+          = render @categories

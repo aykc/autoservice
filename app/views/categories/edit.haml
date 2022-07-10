@@ -1,0 +1,8 @@
+.row
+  .col
+    %h1 Editing category
+    = turbo_frame_tag "edit_#{dom_id(@category)}" do
+      = render "form", category: @category
+    .mb-3
+      = link_to "Back", @category, class: "btn btn-md btn-outline-primary"
+      = link_to "Back to categories", categories_path, class: "btn btn-md btn-outline-primary"

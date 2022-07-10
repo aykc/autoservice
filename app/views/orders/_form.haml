@@ -1,6 +1,7 @@
 .row
   .col-9.border
     = form_with(model: order) do |form|
+      = render 'shared/error', obj: form.object
       .mb-3
         = form.label :customer_name, class: "form-label"
         = form.text_field :customer_name, class: "form-control form-control-md"

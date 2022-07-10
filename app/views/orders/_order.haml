@@ -31,5 +31,5 @@
                 = turbo_frame_tag "new_#{dom_id(order)}_line_item"
               .mb-1
                 %h2 Services:
-                = turbo_frame_tag :line_items do
+                = turbo_frame_tag "#{dom_id(order)}_line_items" do
                   = render order.line_items

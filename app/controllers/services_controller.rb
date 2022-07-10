@@ -31,7 +31,12 @@ class ServicesController < ApplicationController
       if @service.save
         format.html { redirect_to service_url(@service), notice: "Service was successfully created." }
         format.json { render :show, status: :created, location: @service }
-        format.turbo_stream { render turbo_stream: turbo_stream.append(:services, @service)+turbo_stream.remove("new_category_#{@category.id}_service")}
+        format.turbo_stream do
+          render turbo_stream:  turbo_stream.append("category_#{@category.id}_services", @service) + \
+                                turbo_stream.update("new_category_#{@category.id}_service", '') + \
+                                turbo_stream.replace('flash', partial: 'layouts/flash', \
+                                                     locals: {flash: {notice: 'Service was successfully added'}})
+        end
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @service.errors, status: :unprocessable_entity }

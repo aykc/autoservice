@@ -34,9 +34,12 @@ class OrdersController < ApplicationController
       if @order.save
         format.html { redirect_to order_url(@order), notice: "Order was successfully created." }
         format.json { render :show, status: :created, location: @order }
-        format.turbo_stream { render turbo_stream: turbo_stream.append(:orders, @order) + \
-                              turbo_stream.remove("new_order") + \
-                              turbo_stream.replace('flash', partial: 'layouts/flash', locals: {flash: {notice: 'Order successfully added'}})}
+        format.turbo_stream do
+          render turbo_stream:  turbo_stream.append(:orders, @order) + \
+                                turbo_stream.update("new_order", '') + \
+                                turbo_stream.replace('flash', partial: 'layouts/flash', \
+                                                     locals: { flash: { notice: 'Order was successfully added' }})
+        end
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @order.errors, status: :unprocessable_entity }
@@ -48,8 +51,11 @@ class OrdersController < ApplicationController
   def update
     respond_to do |format|
       if @order.update(order_params)
-        format.turbo_stream { render turbo_stream: turbo_stream.replace("order_#{@order.id}", @order) + \
-                              turbo_stream.replace('flash', partial: 'layouts/flash', locals: {flash: { notice: 'Order successfully updated' } })}
+        format.turbo_stream do
+          render turbo_stream:  turbo_stream.replace("order_#{@order.id}", @order) + \
+                                turbo_stream.replace('flash', partial: 'layouts/flash', \
+                                                     locals: {flash: { notice: 'Order was successfully updated' } })
+        end
         format.html { redirect_to order_path(@order), notice: "Order was successfully updated." }
         format.json { render :show, status: :ok, location: @order }
       else
@@ -64,8 +70,11 @@ class OrdersController < ApplicationController
     @order.destroy
 
     respond_to do |format|
-      format.turbo_stream { render turbo_stream: turbo_stream.remove(@order) + \
-                            turbo_stream.replace('flash', partial: 'layouts/flash', locals: {flash: { notice: 'Order successfully removed' } })}
+      format.turbo_stream do
+        render turbo_stream:  turbo_stream.remove(@order) + \
+                              turbo_stream.replace('flash', partial: 'layouts/flash', \
+                                                   locals: { flash: { notice: 'Order successfully removed' } })
+      end
       format.html { redirect_to orders_url, notice: "Order was successfully destroyed." }
       format.json { head :no_content }
     end

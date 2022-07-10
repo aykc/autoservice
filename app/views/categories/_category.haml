@@ -1,19 +1,21 @@
-.card.mb-3.shadow{:id => "#{dom_id category}"}
-  .card-header.bg-transparent
-    = link_to category_path(category) do
+= turbo_frame_tag dom_id(category) do
+  .card.mb-3.shadow
+    .card-header.bg-transparent
+      = turbo_frame_tag "edit_#{dom_id(category)}" do
+        = link_to category_path(category) do
+          .row
+            .container
+              %strong=category.name
+    .card-body
       .row
-        .container
-          %strong=category.name
-  .card-body
-    .row
-      .container.mb-2
-        .mb-2.d-inline-flex
-          = link_to "Add Service", new_category_service_path(category), data: {turbo_frame: "new_#{dom_id(category)}_service"}, class: "btn btn-sm btn-outline-success mx-1"
-          = link_to "Edit this category", edit_category_path(category), class: "btn btn-sm btn-outline-warning mx-1"
-          = button_to "Destroy this category", category, method: :delete, class: "btn btn-sm btn-outline-danger mx-1"
-        .mb-3
-          = turbo_frame_tag "new_#{dom_id(category)}_service"
-        .mb-3
-          %h2 Services:
-          = turbo_frame_tag :services do
-            = render category.services
+        .container.mb-2
+          .mb-2.d-inline-flex
+            = link_to "Add Service", new_category_service_path(category), data: {turbo_frame: "new_#{dom_id(category)}_service"}, class: "btn btn-sm btn-outline-success mx-1"
+            = link_to "Edit", edit_category_path(category), data: { turbo_frame: "edit_#{dom_id(category)}"}, class: "btn btn-sm btn-outline-warning mx-1"
+            = button_to "Destroy this category", category, method: :delete, class: "btn btn-sm btn-outline-danger mx-1"
+          .mb-3
+            = turbo_frame_tag "new_#{dom_id(category)}_service"
+          .mb-3
+            %h2 Services:
+            = turbo_frame_tag "#{dom_id(category)}_services" do
+              = render category.services

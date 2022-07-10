@@ -1,6 +1,7 @@
 .row
-  .col.col-md-3
+  .col
     = form_with(model: category) do |form|
+      = render 'shared/error', obj: form.object
       .mb-3
         = form.label :name, class: "form-label"
         = form.text_field :name, class: "form-control form-control-md"
