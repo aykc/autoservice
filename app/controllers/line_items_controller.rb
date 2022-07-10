@@ -1,9 +1,12 @@
 class LineItemsController < ApplicationController
-  before_action :set_line_item, only: :destroy
+  before_action :set_line_item, only: %i[edit update destroy]
 
   def new
     @order = Order.find params[:order_id]
     @line_item = @order.line_items.new
+  end
+
+  def edit
   end
 
   def create
@@ -17,6 +20,19 @@ class LineItemsController < ApplicationController
         format.turbo_stream { render turbo_stream: turbo_stream.append(:line_items, @line_item)+turbo_stream.remove("new_order_#{@order.id}_line_item")}
       else
         format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @line_item.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def update
+    respond_to do |format|
+      if @line_item.update(line_item_params)
+        format.turbo_stream { render turbo_stream: turbo_stream.replace("line_item_#{@line_item.id}", @line_item) }
+        format.html { redirect_to_back_or line_item_path(@line_item), notice: "Service was successfully updated." }
+        format.json { render :show, status: :ok, location: @line_item }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @line_item.errors, status: :unprocessable_entity }
       end
     end

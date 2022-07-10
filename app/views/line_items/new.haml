@@ -2,6 +2,10 @@
   .col
     = render 'shared/error', obj: @line_item
     %h1 New service
-    = render "form", order: @order, line_item: @line_item
+    = turbo_frame_tag "new_#{dom_id(@order)}_line_item" do
+      .row
+        .col.border
+          = form_with(model: [@order, @line_item]) do |form|
+            = render "form", form: form
     .mb-3
       = link_to "Back", order_path(@order), class: "btn btn-outline-primary"

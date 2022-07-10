@@ -1,6 +1,10 @@
 .row
   .col
     %h1 New service
-    = render "form", category: @category, service: @service
+    = turbo_frame_tag "new_#{dom_id(@category)}_service" do
+      .row
+        .col.col-md-3
+          = form_with(model: [@category, @service]) do |form|
+            = render "form", form: form
     .mb-3
       = link_to "Back to services", category_services_path(@category), class: "btn btn-md btn-outline-primary my-3"

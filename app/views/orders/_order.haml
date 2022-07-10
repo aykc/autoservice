@@ -1,29 +1,35 @@
-.card.mb-3.shadow{:id => "#{dom_id order}"}
-  .card-header.bg-transparent
-    = link_to order_path(order) do
-      .row
-        .container
-          %strong Order from #{order.created_at}
-  .card-body
-    .row
-      .container.mb-2
-        %p
-          %strong Customer name:
-          = order.customer_name
-        %p
-          %strong Phone number:
-          = order.phone_number
-        %p
-          %strong Email:
-          = order.email
-        %mb-2
-          = link_to "Add service", new_order_line_item_path(order), data: {turbo_frame: "new_#{dom_id(order)}_line_item"}, class: "btn btn-sm btn-outline-success"
-          = link_to "Edit this order", edit_order_path(order), class: "btn btn-sm btn-outline-warning"
-          .d-inline-block
-            = button_to "Destroy this order", order, method: :delete, class: "btn btn-sm btn-outline-danger"
-        .mb-3
-          = turbo_frame_tag "new_#{dom_id(order)}_line_item"
-        %mb-2
-          %h2 Services:
-          = turbo_frame_tag :line_items do
-            = render order.line_items
+= turbo_frame_tag dom_id(order) do
+  .row
+    .col.col-8
+      .card.mb-3.shadow
+        .card-header.bg-transparent
+          = link_to order_path(order) do
+            .row
+              .container
+                %strong Order from #{order.created_at}
+        .card-body
+          = turbo_frame_tag "edit_#{dom_id(order)}" do
+            .row
+              .col.mb-2
+                .mb-1
+                  %strong Customer name:
+                  = order.customer_name
+                .mb-1
+                  %strong Phone number:
+                  = order.phone_number
+                .mb-1
+                  %strong Email:
+                  = order.email
+          .row
+            .col.mb-2
+              .mb-2
+                = link_to "Add service", new_order_line_item_path(order), data: {turbo_frame: "new_#{dom_id(order)}_line_item"}, class: "btn btn-sm btn-outline-success"
+                = link_to "Edit this order", edit_order_path(order), data: { turbo_frame: "edit_#{dom_id(order)}"}, class: "btn btn-sm btn-outline-warning"
+                .d-inline-block
+                  = button_to "Destroy this order", order, method: :delete, class: "btn btn-sm btn-outline-danger"
+              .mb-1
+                = turbo_frame_tag "new_#{dom_id(order)}_line_item"
+              .mb-1
+                %h2 Services:
+                = turbo_frame_tag :line_items do
+                  = render order.line_items

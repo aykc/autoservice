@@ -1,7 +1,16 @@
 .row
   .col
-    %h1 Editing order
-    = render "form", order: @order
+    %h1 Edit order
+    = turbo_frame_tag "edit_#{dom_id(@order)}" do
+      = render "form", order: @order
+    .mb-3
+      %h2 Услуги:
+      .mb-2
+        = link_to "Add service", new_order_line_item_path(@order), data: {turbo_frame: "new_#{dom_id(@order)}_line_item"}, class: "btn btn-sm btn-outline-success"
+      .mb-1
+        = turbo_frame_tag "new_#{dom_id(@order)}_line_item"
+      = turbo_frame_tag :line_items do
+        = render @order.line_items
     .mb-3
       = link_to "Back", @order, class: "btn btn-md btn-outline-primary"
       = link_to "Back to orders", orders_path, class: "btn btn-md btn-outline-primary"

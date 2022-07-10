@@ -1,0 +1,11 @@
+.row
+  .col
+    %h1 Editing service
+    = turbo_frame_tag "#{dom_id(@service)}" do
+      .row
+        .col.col-md-3.border
+          = form_with(model: @service) do |form|
+            = render "form", form: form
+    .mb-3
+      = link_to "Show this service", @service
+      = link_to "Back to category", category_path(@service.category)

@@ -43,6 +43,7 @@ class ServicesController < ApplicationController
   def update
     respond_to do |format|
       if @service.update(service_params)
+        format.turbo_stream { render turbo_stream: turbo_stream.replace("service_#{@service.id}", @service) }
         format.html { redirect_to service_url(@service), notice: "Service was successfully updated." }
         format.json { render :show, status: :ok, location: @service }
       else

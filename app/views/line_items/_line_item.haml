@@ -1,16 +1,18 @@
-.card.mb-1.shadow{:id => "#{dom_id line_item}"}
-  .card-header.bg-transparent
-    .row
-      .container
-        .mb-1
-          %strong Услуга:
-          = link_to line_item.service.name, service_path(line_item.service)
-        .mb-1
-          %strong Цена:
-          = line_item.service.price
-        .mb-1
-          %strong Исполнитель:
-          = line_item.user.name
-        .d-flex
-          = button_to "Remove service", line_item, method: :delete, class: "btn btn-sm btn-outline-danger mx-1"
+= turbo_frame_tag dom_id(line_item) do
+  .card.mb-1.shadow
+    .card-header.bg-transparent
+      .row
+        .container
+          .mb-1
+            %strong Услуга:
+            = link_to line_item.service.name, service_path(line_item.service)
+          .mb-1
+            %strong Цена:
+            = line_item.service.price
+          .mb-1
+            %strong Исполнитель:
+            = line_item.user.name
+          .d-flex
+            = link_to "Edit", edit_line_item_path(line_item), data: { turbo_frame: "#{dom_id(line_item)}"}, class: "btn btn-sm btn-outline-warning mx-1"
+            = button_to "Remove service", line_item, method: :delete, class: "btn btn-sm btn-outline-danger mx-1"
 

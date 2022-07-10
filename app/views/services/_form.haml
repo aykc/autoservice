@@ -1,12 +1,8 @@
-= turbo_frame_tag "new_#{dom_id(category)}_service" do
-  .row
-    .col.col-md-3
-      = form_with(model: [category, service]) do |form|
-        .mb-3
-          = form.label :name, class: "form-label"
-          = form.text_field :name, class: "form-control form-controll-sm"
-        .mb-3
-          = form.label :price, class: "form-label"
-          = form.text_field :price, class: "form-control form-controll-sm"
-        .mb-3
-          = form.submit class: "btn btn-primary"
+.mb-3
+  = form.label :name, class: "form-label"
+  = form.text_field :name, class: "form-control form-controll-sm"
+.mb-3
+  = form.label :price, class: "form-label"
+  = form.text_field :price, class: "form-control form-controll-sm"
+.mb-3
+  = form.submit class: "btn btn-primary"

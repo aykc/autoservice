@@ -1,10 +1,12 @@
 .row
+  .col-3
+    = render 'filters'
   .col
     %p{:style => "color: green"}= notice
     %h1 Orders
     .mb-3
       = link_to "New order", new_order_path, class: "btn btn-md btn-outline-primary"
-      = link_to "Export this list", orders_path(format: :xlsx), class: "btn btn-md btn-outline-primary"
+      = link_to "Export this list", url_for(request.GET.merge(format: :xlsx)), class: "btn btn-md btn-outline-primary"
     #orders
       - @orders.each do |order|
         = render order

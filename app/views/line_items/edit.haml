@@ -1,0 +1,11 @@
+.row
+  .col
+    = render 'shared/error', obj: @line_item
+    %h1 Edit service
+    = turbo_frame_tag dom_id(@line_item) do
+      .row
+        .col.border
+          = form_with(model: @line_item) do |form|
+            = render "form", form: form
+    .mb-3
+      = link_to "Back", order_path(@line_item.order), class: "btn btn-outline-primary"
