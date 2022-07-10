@@ -5,8 +5,19 @@
     %p{:style => "color: green"}= notice
     %h1 Orders
     .mb-3
-      = link_to "New order", new_order_path, data: { turbo_frame: 'new_order'}, class: "btn btn-md btn-outline-primary"
-      = link_to "Export this list", url_for(request.GET.merge(format: :xlsx)), class: "btn btn-md btn-outline-primary"
+      = link_to "New order", new_order_path, data: { turbo_frame: 'new_order'}, class: "btn btn-lg btn-outline-success"
+      = link_to "Export this list", url_for(request.GET.merge(format: :xlsx)), class: "btn btn-lg btn-outline-success"
+    .mb-3
+      sort by:
+      = sort_link(@q, :customer_name, 'Имя клиента')
+      |
+      = sort_link(@q, :phone_number, 'Номер телефона')
+      |
+      = sort_link(@q, :email)
+      |
+      = sort_link(@q, :services_name, 'Имя услуги')
+      |
+      = sort_link(@q, :line_items_user_name, 'Исполнитель')
     .mb-3
       = turbo_frame_tag "new_order"
     = turbo_frame_tag 'orders' do
