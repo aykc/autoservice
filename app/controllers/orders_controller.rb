@@ -4,7 +4,7 @@ class OrdersController < ApplicationController
   # GET /orders or /orders.json
   def index
     @q = Order.ransack params[:q]
-    @orders = @q.result(distinct: true)
+    @orders = @q.result(distinct: true).joins(:services, :line_items).includes({line_items: [:user]}, :services)
     # @orders = Order.all
     respond_to do |format|
       format.html

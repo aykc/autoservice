@@ -1,22 +1,37 @@
 %h2 Filters:
-= search_form_for @q do |f|
-  .mb-1
-    = f.label :customer_name_cont, class: "form-label"
-    = f.search_field :customer_name_cont, class: "form-control form-control-sm"
-  .mb-1
-    = f.label :phone_number_cont, class: "form-label"
-    = f.search_field :phone_number_cont, class: "form-control form-control-sm"
-  .mb-1
-    = f.label :email_cont, class: "form-label"
-    = f.search_field :email_cont, class: "form-control form-control-sm"
-  
-  -# \# Search if an associated articles.title starts with...
-  -# = f.label :articles_title_start
-  -# = f.search_field :articles_title_start
-  -# 
-  -# \# Attributes may be chained. Search multiple attributes for one value...
-  -# = f.label :name_or_description_or_email_or_articles_title_cont
-  -# = f.search_field :name_or_description_or_email_or_articles_title_cont
-  
-  .mb-1
-    = f.submit class: "btn btn-sm btn-primary"
+.row
+  .col.border.mb-3
+    = search_form_for @q do |f|
+      .mb-1
+        = f.label :customer_name_or_phone_number_or_email_or_services_name_or_line_items_user_name_cont, 'Quick search', class: "form-label"
+        = f.search_field :customer_name_or_phone_number_or_email_or_services_name_or_line_items_user_name_cont, class: "form-control form-control-sm"
+      .mb-1
+        = f.submit class: "btn btn-md btn-primary"
+
+.row
+  .col.border
+    %h3 Advanced search:
+    = search_form_for @q do |f|
+      .mb-1
+        = f.label :customer_name_cont, 'Имя клиента содержит', class: "form-label"
+        = f.search_field :customer_name_cont, class: "form-control form-control-sm"
+      .mb-1
+        = f.label :phone_number_cont, 'Номер телефона содержит', class: "form-label"
+        = f.search_field :phone_number_cont, class: "form-control form-control-sm"
+      .mb-1
+        = f.label :email_cont, 'email содержит', class: "form-label"
+        = f.search_field :email_cont, class: "form-control form-control-sm"
+      .mb-1
+        = f.label :services_name_cont, 'Услуга содержит', class: "form-label"
+        = f.search_field :services_name_cont, class: "form-control form-control-sm"
+      .mb-1
+        = f.label :line_items_user_name_cont, 'Исполнитель содержит', class: "form-label"
+        = f.search_field :line_items_user_name_cont, class: "form-control form-control-sm"
+      
+      -# \# Attributes may be chained. Search multiple attributes for one value...
+      -# = f.label :name_or_description_or_email_or_articles_title_cont
+      -# = f.search_field :name_or_description_or_email_or_articles_title_cont
+      
+      .mb-1
+        = f.submit class: "btn btn-md btn-primary"
+        = link_to 'reset', url_for(request.path), class: "btn btn-md btn-primary"
