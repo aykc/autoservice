@@ -21,3 +21,5 @@
 Требования к инструментам:
  ◦ ruby v 2.6+
  ◦ rails v 6+
+
+Live Demo: [here](https://atoms-autoservice.herokuapp.com/)
