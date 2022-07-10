@@ -17,7 +17,9 @@ class LineItemsController < ApplicationController
       if @line_item.save
         format.html { redirect_to order_url(@order), notice: "Service was successfully added." }
         format.json { render :show, status: :created, location: @order }
-        format.turbo_stream { render turbo_stream: turbo_stream.append(:line_items, @line_item)+turbo_stream.remove("new_order_#{@order.id}_line_item")}
+        format.turbo_stream { render turbo_stream: turbo_stream.append(:line_items, @line_item) + \
+                              turbo_stream.remove("new_order_#{@order.id}_line_item") + \
+                              turbo_stream.replace('flash', partial: 'layouts/flash', locals: {flash: { notice: 'Service successfully added' } })}
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @line_item.errors, status: :unprocessable_entity }
@@ -28,7 +30,8 @@ class LineItemsController < ApplicationController
   def update
     respond_to do |format|
       if @line_item.update(line_item_params)
-        format.turbo_stream { render turbo_stream: turbo_stream.replace("line_item_#{@line_item.id}", @line_item) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace("line_item_#{@line_item.id}", @line_item) + \
+                              turbo_stream.replace('flash', partial: 'layouts/flash', locals: {flash: { notice: 'Service successfully updated' } })}
         format.html { redirect_to_back_or line_item_path(@line_item), notice: "Service was successfully updated." }
         format.json { render :show, status: :ok, location: @line_item }
       else
@@ -42,7 +45,8 @@ class LineItemsController < ApplicationController
     @line_item.destroy
 
     respond_to do |format|
-      format.turbo_stream { render turbo_stream: turbo_stream.remove(@line_item)}
+      format.turbo_stream { render turbo_stream: turbo_stream.remove(@line_item) + \
+                            turbo_stream.replace('flash', partial: 'layouts/flash', locals: {flash: { notice: 'Service successfully removed' } })}
       format.html { redirect_to order_path(@line_item.order), notice: "Service was successfully removed." }
       format.json { head :no_content }
     end

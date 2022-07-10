@@ -1,4 +1,5 @@
-- flash.each do |key, value|
-  .alert.alert-dismissible.fade.show{ class: "alert-#{key}", role: :alert }
-    = value
-    %button.btn-close{ data: { bs: { dismiss: :alert } }, aria: { label: :close } }
+= turbo_frame_tag 'flash' do
+  - flash.each do |key, value|
+    .alert.alert-dismissible.fade.show{ class: "alert-#{key}", role: :alert }
+      = value
+      %button.btn-close{ data: { bs: { dismiss: :alert } }, aria: { label: :close } }

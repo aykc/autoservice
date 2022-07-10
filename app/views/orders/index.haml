@@ -1,13 +1,15 @@
 .row
   .col-3
     = render 'filters'
-  .col
+  .col-9
     %p{:style => "color: green"}= notice
     %h1 Orders
     .mb-3
-      = link_to "New order", new_order_path, class: "btn btn-md btn-outline-primary"
+      = link_to "New order", new_order_path, data: { turbo_frame: 'new_order'}, class: "btn btn-md btn-outline-primary"
       = link_to "Export this list", url_for(request.GET.merge(format: :xlsx)), class: "btn btn-md btn-outline-primary"
-    #orders
+    .mb-3
+      = turbo_frame_tag "new_order"
+    = turbo_frame_tag 'orders' do
       - @orders.each do |order|
         = render order
     .mb-3
