@@ -1,6 +1,8 @@
-= form_with(model: user) do |form|
-  .mb-2
-    = form.label :name, style: "display: block", class: "form-label"
-    = form.text_field :name, class: "form-control form-control-sm"
-  .mb-3
-    = form.submit class: "btn btn-primary"
+= turbo_frame_tag user do
+  = form_with(model: user) do |form|
+    = render 'shared/error', obj: user
+    .mb-2
+      = form.label :name, style: "display: block", class: "form-label"
+      = form.text_field :name, class: "form-control form-control-sm"
+    .mb-3
+      = form.submit class: "btn btn-primary"

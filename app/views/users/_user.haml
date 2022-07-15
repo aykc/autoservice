@@ -1,6 +1,8 @@
-.row.m-1.bg-light{:id => "#{dom_id user}"}
-  .col
-    %strong= link_to user.name, user_path(user)
-  .col.d-inline-flex
-    = link_to "edit", edit_user_path(user), class: "btn btn-sm btn-outline-warning mx-1"
-    = link_to "delete", user, method: :delete, data: { "turbo-method": :delete}, class: "btn btn-sm btn-outline-danger mx-1"
+= turbo_frame_tag user do
+  .row.m-1.bg-light
+    .col
+      = render 'shared/error', obj: user
+      %strong= link_to user.name, user_path(user)
+    .col.d-inline-flex
+      = link_to "edit", edit_user_path(user), data: { turbo_frame: dom_id(user) }, class: "btn btn-sm btn-outline-warning mx-1"
+      = link_to "delete", user, method: :delete, data: { turbo_method: :delete }, class: "btn btn-sm btn-outline-danger mx-1"

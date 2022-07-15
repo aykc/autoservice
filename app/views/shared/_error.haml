@@ -1,6 +1,6 @@
 - if obj.errors.any?
   .alert.alert-danger.alert-dismissible.fade.show{ role: :alert }
-    %h2=pluralize(obj.errors.count, 'Error') + " prohibited this #{obj.class.name.underscore.humanize.downcase} from being saved:"
+    %strong=pluralize(obj.errors.count, 'Error') + " prohibited this #{obj.class.name.underscore.humanize.downcase} from being saved:"
     %ul
       - obj.errors.full_messages.each do |msg|
         %li= msg

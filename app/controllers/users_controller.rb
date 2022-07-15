@@ -25,6 +25,12 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
+        format.turbo_stream do
+          flash.now[:success] = 'User has been created'
+          render turbo_stream: turbo_stream.prepend(:users, @user) + \
+            turbo_stream.update(:new_user, '') + \
+            turbo_stream.replace(:flash, partial: 'layouts/flash')
+        end
         format.html { redirect_to user_url(@user), notice: "User was successfully created." }
         format.json { render :show, status: :created, location: @user }
       else
@@ -38,6 +44,7 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@user, @user) }
         format.html { redirect_to user_url(@user), notice: "User was successfully updated." }
         format.json { render :show, status: :ok, location: @user }
       else
@@ -52,10 +59,20 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.destroy
+        format.turbo_stream do
+          flash.now[:success] = 'Successfully deleted'
+          render turbo_stream: turbo_stream.remove(@user) + \
+            turbo_stream.replace(:flash, partial: 'layouts/flash')
+        end
         format.html { redirect_to users_url, notice: "User was successfully destroyed." }
         format.json { head :no_content }
       else
-        format.html { redirect_to users_url, alert: "User can not be deleted!" }
+        format.turbo_stream do
+          flash.now[:alert] = 'Cant be deleted'
+          render turbo_stream: turbo_stream.replace(@user, @user) + \
+            turbo_stream.replace('flash', partial: 'layouts/flash')
+        end
+        format.html { redirect_to users_path, alert: "User can not be deleted!" }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end

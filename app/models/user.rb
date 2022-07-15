@@ -7,7 +7,10 @@ class User < ApplicationRecord
 
   private
   def check_deletion
-    errors.add(:user, 'Нельзя удалить исполнителя, если он присутствует в нарядах') if line_items.any?
-    throw :abort
+    if line_items.any?
+      errors.add(:user, 'Нельзя удалить исполнителя, если он присутствует в нарядах') if line_items.any?
+      throw :abort
+    end
+    return true
   end
 end
